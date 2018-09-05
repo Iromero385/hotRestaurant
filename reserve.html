@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>
+        Make a reservation!
+      </h1>
+      <h3>Enter you information below to make a reservation!</h3>
+      <hr>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3><strong>Make a Reservation</strong></h3>
+    </div>
+
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="Dihn" aria-describedby="emailHelp" placeholder="Enter your name here">
+          <small id="namehelp" class="form-text text-muted">
+        </div>
+        <div class="form-group">
+          <label for="Id">ID</label>
+          <input type="number" class="form-control" id="ID" placeholder="Select a numerical ID number">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number</label>
+          <input type="number" class="form-control" id="phoneNumber" placeholder="phoneNumber">
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header">
+      <h3><strong>Current Reservations</strong></h3>
+    </div>
+    <div class="card-body">
+      <h2 id="reservation">Reservation</h2>
+      <div id="stats">
+        <h3><strong>Name:</strong> <span id="name">Chicken Strip</span></h3>
+        <h3><strong>Phone:</strong> <span id="phone">510-555-5555</span></h3>
+        <h3><strong>email:</strong> <span id="emailaddress">chicken@strip.com</span></h3>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
