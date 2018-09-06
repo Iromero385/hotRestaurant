@@ -143,7 +143,6 @@ app.post("/api/tables", function(req, res) {
     }
     else{
         tables.push(newReservation)
-        res.json(tables);
         res.json("go");  
     };
 
