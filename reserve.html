@@ -98,8 +98,8 @@ var currentURL = window.location.origin;
 //then magic connects the server side to the client side.
 // use ajax to post to this specific route. api/tables
 //we want new Reservation to be the request sent by the client
-$.post("/api/tables", newReservation,
-function(data) {
+$.post("/api/tables", newReservation)
+.then(function(data) {
   console.log("post");
 // If a table is available... tell user they are booked.
 if(data == "go"){
@@ -112,7 +112,8 @@ alert("Sorry! you are on the wait list")
 
 
 
-});
+}),
+
 
 // Clear the form when submitting
 $('#name-input').val("");

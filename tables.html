@@ -9,7 +9,9 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
@@ -50,63 +52,63 @@
 
 <script>
 function runTableQuery(){
-var currentURL = window.location.origin;
+// var currentURL = window.location.origin;
 
 // $.ajax({url: currentURL + "/api/tables", method: "GET"})
 $.get("/api/tables",function(tableData){
 
 
 console.log("-----------------");
-console.log("URL: " + currentURL + "/api/tables");
+console.log( "/api/tables");
 console.log("-------------------")
 
 console.log(tableData);
 console.log("--------------------")
 
 for (var i =0; i <tableData.length; i++){
-  var tableSection=$("<div>");
-  tableSection.attr('id', 'tableboard');
-  tableSection.attr('class', 'tableboard-' + i+1);
-  $('#reservation').append(tableSection)
+  
+          console.log(tableData[i]);
+          var listGroupItem = $("<li class='list-group-item'>");
 
-  var tableNumber = i+1;
+          listGroupItem.append($("<h2>").text("Name: " + tableData[i].name));
+          listGroupItem.append($("<h3>").text("ID: " + tableData[i].Id));
+          listGroupItem.append($("<h3>").text("email: " + tableData[i].email));
+          listGroupItem.append($("<h3>").text("phone: " + tableData[i].phone));
 
-  $("#tableboard-"+ i+1).append('<h3><span class="label label-primary">' + tableNumber + "</span> | " +
-    tableData[i].name + "</h3>")
+          $("#reservation").append(listGroupItem);
+
+
+    console.log(tableData[i])
   }
   })
   };
 
 function runWaitlist(){
-var currentURL = window.location.origin;
+// var currentURL = window.location.origin;
 
-$.ajax({url: currentURL + "/api/waitlist", method: "GET"})
-.then(function(tableData){
+// $.ajax({url: currentURL + "/api/waitlist", method: "GET"})
+$.get("/api/waitlist",function(tableData){
 
+for (var i =0; i <tableData.length; i++){
+  
+  console.log(tableData[i]);
+  var listGroupItem = $("<li class='list-group-item'>");
 
-console.log("-----------------");
-console.log("URL: " + currentURL + "/api/waitlist");
-console.log("-------------------")
+  listGroupItem.append($("<h2>").text("Name: " + tableData[i].name));
+  listGroupItem.append($("<h3>").text("ID: " + tableData[i].Id));
+  listGroupItem.append($("<h3>").text("email: " + tableData[i].email));
+  listGroupItem.append($("<h3>").text("phone: " + tableData[i].phone));
 
-console.log(tableData);
-console.log("--------------------")
-
-for (var i =0; i <tableData.length; i++){ var tableSection=$("<div>");
-  tableSection.attr('id', 'tableboard');
-  tableSection.attr('class', 'tableboard-' + i+1);
-  $('#waitlist').append(tableSection)
-
-  var tableNumber = i+1;
-
-  $("#tableboard-"+ i+1).append('<h3><span class="label label-primary">' + tableNumber + "</span> | " +
-    tableData[i].name + "</h3>")
-  }
-  })
-  };
-
+  $("#waitlist").append(listGroupItem);
+}
+});
+};
 
   runTableQuery();
   runWaitlist();
+
+
 </script>
 
 </body>
+</html>
