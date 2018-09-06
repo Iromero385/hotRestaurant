@@ -4,10 +4,12 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
 
+
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT ||3000;
+ 
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,32 +33,76 @@ var waitlist = [
         phone: "910-484-5555"
     }
 ]
-// Routes
-// =============================================================
+// // Routes
+// // =============================================================
+// @Routes
+// app.get('/:endpoint?', function (req, res) {
+//   switch (req.params.endpoint) {
+//     case undefined:
+//     case '/':
+//       res.sendFile(path.join(__dirname, 'home.html'))
+//       break
+//     case 'reserve':
+//     res.sendFile(path.join(__dirname, 'reserve.html'))
+//       break
+//     case 'tables':
+//     res.sendFile(path.join(__dirname, 'tables.html'))
+//       break
+//     default:
+//     res.sendFile(path.join(__dirname, '404.html'))
+//       break
+//   }
+// })
 
-// Basic route that sends the user first to the AJAX Page
+
+// app.get('/api/:endpoint?', function (req, res) {
+//   switch (req.params.endpoint) {
+//     case 'tables':
+//       res.json(tables)
+//       break
+//     case 'waitlist':
+//       res.json(tables.slice(5))
+//       break
+//     default:
+//       res.status(404).json({error: 'Not Found'})
+//       break
+//   }
+// })
+
+// app.post('/tables', function (req, res) {
+//   var table = req.body
+
+//   let response
+//     res.status(201)
+//     tables.push(table)
+
+//   res.json(response)
+  
+// })
+
+// // Basic route that sends the user first to the AJAX Page
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "view.html"));
+  res.sendFile(path.join(__dirname, "home.html"));
 });
 
-// this will be make reservation
+// // this will be make reservation
 app.get("/reserve", function(req, res) {
   res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
-// view tables - names should change
+// // view tables - names should change
 app.get("/tables", function(req, res) {
   res.sendFile(path.join(__dirname, "tables.html"));
 });
 
-// Displays api tables
+// // Displays api tables
 app.get("/api/tables", function(req, res) {
-  return res.json(tables);
+  res.json(tables);
 });
 
-// Displays api waitlist
+// // Displays api waitlist
 app.get("/api/waitlist", function(req, res) {
-    return res.json(waitlist);
+    res.json(waitlist);
   });
 
 // Displays a single table, or returns false
@@ -75,25 +121,35 @@ app.get("/api/waitlist", function(req, res) {
 // });
 
 // this will be used to make new tables
-app.post("/api/tables", function(req, res) {
-  // req.body hosts is equal to the JSON post sent from the user
-  // This works because of our body-parser middleware
-  var newReservation = req.body;
+//whenever we make a post request to the post api /api/tables route, run this function:
 
-  // Using a RegEx Pattern to remove spaces from newReservation
-  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-//   newReservation.routeName = newReservation.name.replace(/\s+/g, "").toLowerCase();
+//   // req.body hosts is equal to the JSON post sent from the user
+//   // This works because of our body-parser middleware
+//   //since the request sent by the client is New Character;
+//   // we can use the body of the request to create the variable newReservation 
+//   // on the server
+app.post("/api/tables", function(req, res) {
+  var newReservation = req.body;
+  console.log(req.body);
+  console.log(newReservation,"server");
+
+//   // Using a RegEx Pattern to remove spaces from newReservation
+//   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+// //   newReservation.routeName = newReservation.name.replace(/\s+/g, "").toLowerCase();
     if (tables.length === 5 ){
         waitlist.push(newReservation)
-        res.json("Reservation are full. You have been added to the waitlist.")
+      
+        res.json("wait");
     }
     else{
         tables.push(newReservation)
-        res.json("Reservation has been recorded.");
-    }
+        res.json(tables);
+        res.json("go");  
+    };
 
-
-});
+  
+  });
+// });
 
 // Starts the server to begin listening
 // =============================================================

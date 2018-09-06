@@ -9,16 +9,18 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
-
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ 
 
 
   <div class="container">
@@ -31,54 +33,98 @@
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-header">
-      <h3><strong>Make a Reservation</strong></h3>
-    </div>
-
-    <div class="card-body">
-      <form>
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="Dihn" aria-describedby="emailHelp" placeholder="Enter your name here">
-          <small id="namehelp" class="form-text text-muted">
-        </div>
-        <div class="form-group">
-          <label for="Id">ID</label>
-          <input type="number" class="form-control" id="ID" placeholder="Select a numerical ID number">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <div class="form-group">
-          <label for="phoneNumber">Phone Number</label>
-          <input type="number" class="form-control" id="phoneNumber" placeholder="phoneNumber">
-        </div>
-
-
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-
-    </div>
+<div class="card">
+  <div class="card-header">
+    <h3><strong>Make a Reservation</strong></h3>
   </div>
-
-
-  <div class="card">
-    <div class="card-header">
-      <h3><strong>Current Reservations</strong></h3>
-    </div>
-    <div class="card-body">
-      <h2 id="reservation">Reservation</h2>
-      <div id="stats">
-        <h3><strong>Name:</strong> <span id="name">Chicken Strip</span></h3>
-        <h3><strong>Phone:</strong> <span id="phone">510-555-5555</span></h3>
-        <h3><strong>email:</strong> <span id="emailaddress">chicken@strip.com</span></h3>
+  <div class="card-body">
+    <!-- <form action="./api/tables" method="POST" role="form"> -->
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name-input" placeholder="Enter your name here">
+        <small id="namehelp" class="form-text text-muted">
       </div>
-    </div>
+      <div class="form-group">
+        <label for="Id">ID</label>
+        <input type="number" class="form-control" id="id-input" placeholder="Select a numerical ID number">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="email-input" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="number" class="form-control" id="phone-input" placeholder="phone Number">
+      </div>
+
+      <button type="submit" id="submit" class="submit btn btn-primary">Submit</button>
+    </form>
+
   </div>
+</div>
+
+
+<div class="card">
+  <div class="card-header">
+    <h3><strong>Current Reservations</strong></h3>
   </div>
+  <div class="card-body">
+    <div id="reservations"> </div>
+
   </div>
-  </div>
+</div>
+</div>
+
+  <script>
+
+   //Once user fills out the form and clicks the add button,
+    //I want you to run this function:
+$("#submit").on("click", function(event) {
+event.preventDefault();
+//create an object called newReservation that contains all of the
+//attributes filled out on the form that the user filled out
+var newReservation = {
+name: $("#name-input").val().trim(),
+Id: $("#id-input").val().trim(),
+email: $("#email-input").val().trim(),
+phone: $("#phone-input").val().trim()
+};
+console.log(newReservation,"client")
+console.log(newReservation)
+
+var currentURL = window.location.origin;
+//then magic connects the server side to the client side.
+// use ajax to post to this specific route. api/tables
+//we want new Reservation to be the request sent by the client
+$.post("/api/tables", newReservation,
+function(data) {
+  console.log("post");
+// If a table is available... tell user they are booked.
+if(data == "go"){
+alert("Yay! You are officially booked!")
+}
+// If a table is available... tell user they on the waiting list.
+if(data == "wait"){
+alert("Sorry! you are on the wait list")
+}
+
+
+
+});
+
+// Clear the form when submitting
+$('#name-input').val("");
+$('#id-input').val("");
+$('#phone-input').val("");
+$('#id-input').val("")
+
+});
+  
+  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  </body>
+
+  </html>

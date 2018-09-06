@@ -1,0 +1,25 @@
+{
+  "name": "hotrestaurant",
+  "version": "1.0.0",
+  "description": "read me here",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Iromero385/hotRestaurant.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Iromero385/hotRestaurant/issues"
+  },
+  "homepage": "https://github.com/Iromero385/hotRestaurant#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "path": "^0.12.7"
+  }
+}
