@@ -105,6 +105,21 @@ app.get("/api/waitlist", function(req, res) {
     res.json(waitlist);
   });
 
+// clears reservations and pushes waitlist to reservationss
+app.get("/api/clear", function(req, res) {
+  tables = [];
+  for (var i = 0; i < 5; i++) {
+    var wait = waitlist.shift();
+    console.log("Cleared reservations and updated waitlist.");
+    console.log(wait);
+    if (wait != null) {
+      tables.push(wait);
+    }
+   }
+  // Shows same page. Is there a better way to do this?
+  res.sendFile(path.join(__dirname, "home.html"));
+})
+
 // Displays a single table, or returns false
 // app.get("/api/tables/:table", function(req, res) {
 //   var chosen = req.params.table;
